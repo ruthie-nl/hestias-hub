@@ -1,0 +1,565 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hestia's Hub</title>
+    <style>  *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        text-decoration:none;
+        font-family:cursive;
+    }
+    html{
+        scroll-behavior: smooth;
+    }
+    .scroll-up-btn{
+        position:fixed;
+        height:45px;
+        width:42px;
+        background:lightskyblue;
+        right:30px;
+        bottom:30px;
+        text-align:center;
+        line-height:45px;
+        color:pink;
+        z-index: 9999;
+        font-size:30px;
+        border-radius: 6px;
+        cursor:pointer;
+        opacity:0;
+        pointer-events:none;
+        transition: all 0.3s ease;
+    }
+    .scroll-up-btn.show{
+        opacity:1;
+        pointer-events:auto;
+        bottom:30px; 
+    }
+    .max-width{
+        max-width:1300px;
+        padding:0 80px;
+        margin:auto;
+    }
+    .navbar{
+        position:fixed;
+        padding:15px 0;
+        width:100%;
+        transition: all 0.3s ease;
+        z-index:999;
+    
+    }
+    .navbar.sticky{
+        padding:15px 0;
+        background:lightskyblue;
+    }
+    .navbar .max-width{
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+    }
+    .navbar .logo a{
+        font-size:38px;
+        font-weight:600;
+        color:pink;
+      
+    
+    }
+    .navbar .logo a span{
+        color:lightskyblue;
+        transition: all 0.3s ease;
+    }
+    .navbar.sticky .logo a span{
+        color:pink;
+    }
+    .navbar .menu li{
+        list-style:none;
+        display:inline-block;
+    
+    }
+    .navbar .menu li a {
+        color:pink;
+        font-size:xx-large;
+        font-weight:500;
+        margin-left:25px;
+        transition:.3s ease; 
+    }
+    .navbar .menu li a:hover{
+    color:white;
+    }
+    .navbar.sticky .menu li a:hover{
+        color:white;
+    }
+    .btn-menu{
+        color:pink;
+        font-size:23px;
+        cursor:pointer;
+        display:none;
+    }
+    .home{
+        display:flex;
+        background-size:cover;
+        height:100vh;
+        color:pink;
+        background-image: url("hestia.png");
+         background-position:center;
+         background-repeat: no-repeat;
+    text-align: center;
+    opacity: 100;
+    }
+    .home .max-width{
+        margin: auto 0 auto 0;
+        width: 100%;
+    }
+         .home .home-content a{
+            display:inline-block;
+            color:lightskyblue;
+            font-size:25px;
+            padding: 12px 36px;
+            margin-top:20px;
+            border-radius:16px;
+            border:2px solid lightskyblue;
+            transition:.3s;
+        }
+        .home .home-content a:hover{
+            background:white;}
+            .about .section-title{
+            position:relative;
+            text-align:center;
+            font-size: 40px;
+            font-weight: 500;
+            font-family:cursive;
+            margin-bottom:60px;
+            padding-bottom:20px;
+        }
+        .about .section-title::before{
+            content: "";
+            position:absolute;
+            bottom:0px;
+            left:50%;
+            width:180px;
+            height:3px;
+            background:whitesmoke;
+            transform:translateX(-50%);
+        
+        }
+        .about .section-title::after{
+            position:absolute;
+            bottom:-17px;
+            left:50%;
+            font-size:20px;
+            padding:5px;
+            color:lightskyblue;
+            background:whitesmoke;
+            transform:translateX(-50%);
+        
+        }
+        .about .about-content{
+            display:flex;
+            flex-wrap:wrap;
+            align-items:center;
+            justify-content:space-between;
+        
+        }
+        .about .about-content .left{
+        width:45%;
+        }
+        .about .about-content .left img{
+            height:400px;
+            width:400px;
+            object-fit:cover;
+            border-radius: 8px;
+        }
+        .about .about-content .right{
+            width:53%
+        }
+        .about .about-content .right .text{
+            font-size:25px;
+            font-weight:600;
+            margin-bottom:10px;
+        }
+        .about .about-content .right .text span{
+            color:lightskyblue;
+        }
+        .about .about-content .right p{
+            text-align:justify;
+            font-size: larger;
+        
+        }
+        .about .about-content .right a{
+            display:inline-block;
+            color:whitesmoke;
+            font-size:large;
+            padding: 12px 20px;
+            margin-top:20px;
+            border-radius:16px;
+            border:2px solid lightskyblue;
+            transition:.3s;
+        
+        }
+        .about .about-content .right a:hover{
+            color:black;
+            background:lightskyblue;
+        }
+        .service .section-title{
+            position:relative;
+            text-align:center;
+            font-size: 40px;
+            font-weight: 500;
+            font-family: cursive;
+            margin-bottom:60px;
+            padding-bottom:20px;
+        }
+        .service .section-title::before{
+            content: "";
+            position:absolute;
+            bottom:0px;
+            left:50%;
+            width:180px;
+            height:3px;
+            background:lightskyblue;
+            transform:translateX(-50%);
+        
+        }
+        .service .section-title::after{
+            content: "our products include items for your";
+            position:absolute;
+            bottom:-17px;
+            left:50%;
+            font-size:20px;
+            padding:5px;
+            color:black;
+            background:white;
+            transform:translateX(-50%);
+        
+        }
+        
+        .service .content-service{
+            display:flex;
+            flex-wrap:wrap;
+            align-items:center;
+            justify-content:space-between;
+        }
+        .service{
+            color:black;
+            background:linear-gradient(white,whitesmoke,lightskyblue);
+        }
+        .service .content-service .card{
+            width: calc(33% - 20px);
+            background:pink;
+            text-align:center;
+            border-radius:6px;
+            padding: 20px 25px;
+            cursor:pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .service .content-service .card:hover{
+            background-color:whitesmoke;
+        
+        }
+        .service .content-service .card .box{
+            transition: all 0.3s ease;
+        }
+        .service .content-service .card:hover .box{
+            transform: scale(1.05);
+        }
+        .service .content-service .card i{
+            font-size:50px;
+            transition: color 0.3 ease;
+        }
+        .service .content-service .card:hover i{
+            color:pink;
+        }
+        .service .content-service .card .text{
+            font-size:25px;
+            font-weight:500;
+            margin: 10px 0 7px 0;
+        }
+        .service .content-service .card p{
+            font-size:14px;
+            margin: 10px 0 7px 0;
+            transition: all 0.3 ease;
+        }
+        .service .content-service .card:hover p{
+            color:black;
+        }
+        .service .content-service .card:hover .text{
+            color:black;
+        }
+        .contact .section-title{
+            position:relative;
+            text-align:center;
+            font-size: 40px;
+            font-weight: 500;
+            font-family: cursive;
+            margin-bottom:60px;
+            padding-bottom:20px;
+        }
+        .contact .section-title::before{
+            content: "";
+            position:absolute;
+            bottom:0px;
+            left:50%;
+            width:180px;
+            height:3px;
+            background:whitesmoke;
+            transform:translateX(-50%);
+        
+        }
+        .contact .section-title::after{
+            position:absolute;
+            bottom:-17px;
+            left:50%;
+            font-size:20px;
+            padding:5px;
+            color:whitesmoke;
+            background:whitesmoke;
+            transform:translateX(-50%);
+        
+        }
+        .contact{background:linear-gradient(lightskyblue, whitesmoke,white);}
+
+        .contact .contact-content{
+            display:flex;
+            flex-wrap:wrap;
+            align-items:center;
+            justify-content: space-between;
+        }
+        .contact .contact-content .column{
+            width: calc(50% - 30px);
+        }
+        .contact .contact-content .text{
+        font-size:20px;
+        font-weight:600;
+        margin-bottom:10px;
+        }
+        .contact .contact-content .left p{
+        text-align:justify;
+        
+        }
+        .contact .contact-content .left .icons{
+            margin:10px 0;
+        
+        }
+        .contact .contact-content .row{
+            display:flex;
+            height:65px;
+            align-items:center;
+        }
+        .contact .contact-content .row .info{
+            margin-left: 30px;
+        }
+        .contact .contact-content .row i{
+            font-size: 25px;
+            color:whitesmoke;
+        }
+        .contact .contact-content .info .head{
+            font-weight:700;
+        }
+        .contact .contact-content .info  .sub-title{
+            color: black;
+        }
+        .contact .right form .fields{
+            display:flex;
+        
+        }
+        .contact .right form .field,
+        .contact .right form .fields .field{
+            height:45px;
+            width:100%;
+            margin-bottom: 15px;
+        }
+        .contact .right form .textarea{
+            height: 80px;
+            width:100%;
+        
+        }
+        .contact .right form .name{
+            margin-right:10px;
+        
+        }
+        .contact .right form .email{
+            margin-left: 10px;
+        }
+        .contact .right form .field input,
+        .contact .right form .field textarea{
+            height:100%;
+            width:100%;
+            border: 1px solid whitesmoke;
+            border-radius: 6px;
+            outline:none;
+            padding: 0 15px;
+            font-size:17px;
+        
+        }
+        .contact .right form .field textarea{
+            padding-top:10px;
+            resize:none;
+        }
+        .contact .right form .button{
+            height:47px;
+            width:170px;
+        }
+        .contact .right form .button button{
+            width:100%;
+            height:100%;
+            border:2px solid whitesmoke;
+            background: whitesmoke;
+            color: pink;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            cursor:pointer;
+        }
+        .contact .right form .button button:hover{
+            color: whitesmoke;
+            background:lightskyblue;
+        }
+        footer{
+            background:white;
+            padding:20px 23px;
+            text-align:center;
+        
+        }
+        footer span a{
+            color:lightskyblue;
+            font-weight:700;
+        }
+        footer span a:hover{
+            text-decoration:underline;}
+        
+    </style>
+</head>
+<body>
+    <!--Navbar-->
+    <div class="scroll-up-btn"> <i class="fas fa-angle-up"></i></div>
+    <nav class="navbar">
+        <div class="max-width"><div class="logo"> <a href="#"></a></div>
+        <ul class="menu">
+            <li> <a href="#about">About</a></li>
+            <li><a href="#service">Products and Orders</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+<div class="btn-menu"><i class="fas fa fa-paint-brush"></i></div>
+        </div>
+    </nav>
+    <!--Landing Page-->
+    <section id="home" class="home">
+        <div class="max-width">
+            <div class="home-content">
+                <div class="column right" style="object-fit: scale-down;"></div>
+            </div>
+        </div>
+    </section>
+       <!-- About -->
+
+   <section class="about" id="about">
+    <div class="max-width">
+     <h2 class="section-title">About Us</h2>
+     <div class="about-content">
+     <div class="left column">
+            <img src="hh about.jpg" alt="">
+       </div>
+       <div class="column right">
+     <div class="text"></div>
+     <p>The idea of Hestia's Hub originates from Hestia; the Greek Goddess of Hearth, Home and Family.
+         At Hestia's hub we provide you with everything you will require in setting up your very own home. From bedside lamps to crystal vases to welcome mats and so much more.Enjoy shopping with us from the comfort of your house.
+     </p>
+     <a href="#">Read More</a>
+       </div>
+      </div>
+     </div>
+  </section> 
+    <!-- Service Section-->
+    <section class="service" id="service">
+        <div class="max-width">
+        <h2 class="section-title">Menu</h2>
+        <div class="content-service">
+            <div class="card">
+                <div class="box">
+                    <i class="fas fa-paint-brush"></i>
+                    <div class="text">Kitchen</div>
+                    <p>Pots, pans, cutlery sets, dining sets, glassware, trays, food processors, etc</p>
+                    </div>
+            </div>
+            <div class="card">
+                <div class="box">
+                    <i class="fas fa-gift"></i>
+                    <div class="text">Bedroom</div>
+                    <p>pillows, bedside lamps, beddings, duvets, laundry baskets etc</p>
+                    </div>
+            </div>
+            <div class="card">
+                <div class="box">
+                    <i class="fas fa-comment-dollar"></i>
+                    <div class="text">Living Room</div>
+                    <p>throw pillows, vases, ornaments, diffusers, wall clocks, led lights. etc.</p>
+                    </div>
+            </div>
+        </div>
+        </div>
+</section>
+   <!--Contact Section -->
+
+   <section class="contact" id="contact">
+    <div class="max-width">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-content">
+        <div class="column left">
+            <div class="text">Make your enquiries and Place your order here</div>
+            <p></p>
+            <div class="icons">
+                <div class="row">
+                    <i class="fas fa-user"></i>
+                    <div class="info">
+                        <div class="sub-title">Hestia's hub</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="info">
+                        <div class="sub-title">Kano, Nigeria</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <i class="fas fa-envelope"></i>
+                    <div class="info">
+                        <div class="sub-title">hestiashub@gmail.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column right">
+            <div class="text">Message</div>
+            <form action="#">
+                <div class="fields">
+                    <div class="field name">
+                    <input type="text" placeholder="Name">
+                    </div>
+                    <div class="field email">
+                        <input type="text" placeholder="Contact Details and Address">
+                        </div>
+                    </div>
+                            <div class="field textarea">
+                                <textarea cold="30" row="10" placeholder ="Place your Order here"></textarea>
+                                </div>
+                                <div class="button">
+                                        <button type="submit">Place your order</button>
+                                    </div>
+                
+            </form>
+        </div>
+    </div>
+    </div>
+</section>
+ <!--footer section-->
+ <footer><span>Created By <a href="#">Hestia's hub</a><span class="far fa-copyright"></span>2022. All rights Reserved</span>
+ </footer>
+
+</body>
+</html>
